@@ -1,0 +1,20 @@
+.desDiv{
+    border: 1px solid black;
+    height: 150px;
+    width: 560px;
+    float: right;
+}
+.picDiv {
+    width:500px;
+    height: 250px;
+    margin:0 20px 20px 0;
+    padding-top:20px;
+    border:solid 2px #E5E5E5;
+    float:left;
+    background:#F0F0F0;
+    text-align:center;
+
+}
+.container {
+    display: inline-block;
+}
