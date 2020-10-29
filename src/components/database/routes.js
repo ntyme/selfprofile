@@ -43,15 +43,17 @@ router.post('/upload', upload.single("file"), (req, res) => {
 });
 
 //db post
-router.post('/http://localhost:4000/DatabaseSubmit', (req, res) => {
+router.post('/DatabaseSubmit', (req, res) => {
+
     let newEntry = new DOCUMENT({
         fileUrl: req.file,
-        description: req.description,
-        name: req.name        
+        description: req.body.description,
+        name: req.body.name        
     })
+    console.log(req.file);
     newEntry
         .save()
-        .then(entry => {alert("Document Added")}).catch(err=> alert(err))
+        .then(entry => {res.status(200).send("OKAY")}).catch(err=> {res.status(400).send("ERROR")}) 
 
 })
 

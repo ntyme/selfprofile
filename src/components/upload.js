@@ -17,8 +17,9 @@ export default class Upload extends Component {
 
         this.state = {
             name: '',
-            description: "",
-            fileArg: null
+            fileArg: null,
+            description: ""
+            
         };
     }
 
@@ -34,9 +35,11 @@ export default class Upload extends Component {
 
     handlePhotoUpload = event => {
         event.preventDefault();
-        const {name, description, fileArg} = this.state;
+        const {name, fileArg, description} = this.state;
+        const data = {name, fileArg, description};
+        console.log(name, description, fileArg);
         //axios post call
-        axios.post('http://localhost:4000/DatabaseSubmit', {name, fileArg, description})
+        axios.post('http://localhost:4000/DatabaseSubmit', data)
             .then(result =>{
                 alert("SUCCESS");
             }).catch(err =>{

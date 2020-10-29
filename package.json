@@ -44,5 +44,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "babel-plugin-react-html-attrs": "^3.0.5",
+    "concurrently": "^5.3.0"
   }
 }
