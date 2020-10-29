@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import('../components/styles.css')
+import('../src/styles.css')
 
 export default class Display extends Component {
     render() {

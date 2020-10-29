@@ -4,11 +4,16 @@ const AWS = require('aws-sdk');
 const multer = require('multer');
 var storage = multer.memoryStorage();
 var upload = multer({ storage: storage });
-const config = require('./config');
-const DOCUMENT = require('../database/ImageModel');
+const config = require('./database/config');
+const DOCUMENT = require('./ImageModel');
 
 router.post('/upload', upload.single("file"), (req, res) => {
+    console.log("PRINTING FILE: ");
+    console.log(req.file);
+    /*
     const file = req.file;
+    console.log("TEST");
+    console.log(file)
     const url = config.AWS_LINK;
     let s3Bucket = new AWS.S3({
         accessKeyId: config.AWS_ACCESS_KEY,
@@ -26,27 +31,27 @@ router.post('/upload', upload.single("file"), (req, res) => {
         if (err) {
             res.status(500).json({ error: true, Message: err });
         } else {
-            res.send({ data });
+            //res.send({ data });
             var newFileUploaded = {
+                name: req.body.name,
+                about: req.body.about,
                 description: req.body.description,
                 fileLink: url + file.originalname,
-                s3_key: params.Key
+                s3_key: params.Key,
             };
+            //save to mongo
             var document = new DOCUMENT(newFileUploaded);
-            document.save(function (error, newFile) {
-                if (error) {
-                    throw error;
-                }
-            });
+            console.log(document);
+            document.save().then(result => {alert("SUCCESS");res.status(200).send("Thank you")}).catch(err => {alert(err); res.status(400).send("Something went wrong")})
         }
-    });
+    }); */
 });
 
 //db post
 router.post('/DatabaseSubmit', (req, res) => {
 
     let newEntry = new DOCUMENT({
-        fileUrl: req.file,
+        fileUrl: req.fileUrl,
         description: req.body.description,
         name: req.body.name        
     })

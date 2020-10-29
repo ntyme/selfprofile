@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import Upload from "./components/upload";
-import Display from "./components/display";
-import Main from "./components/main";
+import Upload from "./upload";
+import Display from "./display";
+import Main from "./main";
 
 class App extends Component {
   render() {

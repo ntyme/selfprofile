@@ -3,15 +3,15 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const config = require('./config');
+const config = require('./database/config');
 const PORT = 4000;
 const routing = require('./routes');
-const mongo = require('./mongo');
+const mongo = require('./database/mongo');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 app.use(bodyParser.json());
-
+mongoose.set('useCreateIndex', true);
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
@@ -32,7 +32,7 @@ connection.once('open', function(){
 app.get('/', (req, res) =>{
     res.send("Hello and Welcome!")
 })
-app.use('/', routing);
+app.use('/api', routing);
 
 
 app.listen(PORT, function() {
