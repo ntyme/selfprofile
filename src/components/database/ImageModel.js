@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 
-let ImageInfo = new Schema({
+let ImageInfo = new mongoose.Schema({
     name: {type: String},
     fileUrl: {type: String},
     description: {type: String}
-})
+});
 
 ImageInfo.set('collection', 'data');
-ImageModel = mongoose.model('data', ImageInfo);
+const ImageModel = mongoose.model('data', ImageInfo);
 module.exports = ImageModel;

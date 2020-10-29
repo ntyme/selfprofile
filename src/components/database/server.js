@@ -5,10 +5,10 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('./config');
 const PORT = 4000;
-const config = require('./config');
 const routing = require('./routes');
+const mongo = require('./mongo');
 
-mongoose.connect(config.MONGO_URI, {
+mongoose.connect(mongo.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
