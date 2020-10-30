@@ -8,11 +8,7 @@ const config = require('./database/config');
 const DOCUMENT = require('./ImageModel');
 
 router.post('/upload', upload.single("file"), (req, res) => {
-    console.log("PRINTING FILE: ");
-    console.log(req.file);
-    /*
     const file = req.file;
-    console.log("TEST");
     console.log(file)
     const url = config.AWS_LINK;
     let s3Bucket = new AWS.S3({
@@ -42,9 +38,9 @@ router.post('/upload', upload.single("file"), (req, res) => {
             //save to mongo
             var document = new DOCUMENT(newFileUploaded);
             console.log(document);
-            document.save().then(result => {alert("SUCCESS");res.status(200).send("Thank you")}).catch(err => {alert(err); res.status(400).send("Something went wrong")})
+            document.save().then(result => {console.log("SUCCESS");res.status(200).send("Thank you")}).catch(err => {console.log(err); res.status(400).send("Something went wrong")})
         }
-    }); */
+    }); 
 });
 
 //db post
