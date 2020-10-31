@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import ImageModel from "./ImageModel";
+import creds from "./getprofile";
 import('../src/styles.css')
 
 export default class Display extends Component {
     render() {
         return (
-
+            
             <div class="container">
                 <div class="picDiv">
                     <p>

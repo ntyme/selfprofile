@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import api from './api';
 import { select } from 'async';
+import creds from "./getprofile";
 
 export default class Upload extends Component {
 
@@ -25,7 +26,6 @@ export default class Upload extends Component {
   handleSelectedFile = e => {
     e.preventDefault();
     this.setState({
-      description: e.target.value,
       selectedFile: e.target.files[0]
     });
   };
@@ -48,30 +48,18 @@ export default class Upload extends Component {
 
   SubmitData = e => {
     e.preventDefault();
-    const data = new FormData(e.target);
-    data.append("file", this.state.selectedFile, this.state.description);
-    console.log()
-    console.log(data);
+    const data = new FormData();
+    data.append("file", this.state.selectedFile);
+    data.append("name", this.state.name);
+    data.append("about", this.state.about);
+    creds.push(this.state.name);
     api.Upload(data).then(result => { console.log(result) }).catch(err => { console.log(err) })
-
-    /*
-    e.preventDefault();
-    var bool = new Boolean(true);
-    const { name, about, selectedFile, description } = this.state;
-    console.log(this.state.selectedFile);
-    if (selectedFile == null) { bool = false; alert("All fields required") }
-    if (name == null) { bool = false; alert("All fields required") }
-    if (about == null) { bool = false; alert("All fields required") }
-    if (description == null) { { bool = false; alert("All fields required") } }
-    if (bool) {
-      const data = new FormData(e.target);
-      data.append("file", this.state.selectedFile, this.state.description);
-      data.append("name", name);
-      data.append("about", about);
-      console.log(data);
-      api.Upload(data).then(result => { console.log(result) }).catch(err => { console.log(err) })
-
-    } */
+    this.state = {
+      description: "",
+      about: '',
+      name: '',
+      selectedFile: null
+    };
   }
 
   handleUpload = event => {
@@ -98,15 +86,21 @@ export default class Upload extends Component {
     return (
       <form enctype="multipart/form-data" onSubmit={this.SubmitData}>
         <div className="form-group">
-          <label htmlFor="description">Description:</label>
+        <label htmlFor="name">Name:</label>
           <input
             type="text"
-            class="form-control"
-            name="description"
+            name="name"
             onChange={this.onChange}
-            placeholder="Description"
+            placeholder="Name"
           />
-             <input
+          <label htmlFor="about">About:</label>
+          <input
+            type="text"
+            name="about"
+            onChange={this.onChange}
+            placeholder="About"
+          />
+            <input
             type="file"
             name=""
             id=""
