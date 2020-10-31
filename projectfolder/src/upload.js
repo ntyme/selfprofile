@@ -79,6 +79,7 @@ export default class Upload extends Component {
       //data.append("about", this.state.about.value);
       api.Upload(data).then(result => { console.log(result); }).catch(err => { alert(err); })
     }
+    //clear fields here
   }
 
   render() {
@@ -86,20 +87,18 @@ export default class Upload extends Component {
     return (
       <form enctype="multipart/form-data" onSubmit={this.SubmitData}>
         <div className="form-group">
-        <label htmlFor="name">Name:</label>
           <input
             type="text"
             name="name"
             onChange={this.onChange}
             placeholder="Name"
-          />
-          <label htmlFor="about">About:</label>
+          /><br></br><br></br>
           <input
             type="text"
             name="about"
             onChange={this.onChange}
             placeholder="About"
-          />
+          /><br></br><br></br>
             <input
             type="file"
             name=""
