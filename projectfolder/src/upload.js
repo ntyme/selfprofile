@@ -53,13 +53,14 @@ export default class Upload extends Component {
     data.append("name", this.state.name);
     data.append("about", this.state.about);
     creds.push(this.state.name);
-    api.Upload(data).then(result => { console.log(result) }).catch(err => { console.log(err) })
-    this.state = {
+    api.Upload(data).then(result => {alert("Completed!")}).catch(err => { console.log(err) })
+    this.setState({
       description: "",
       about: '',
       name: '',
       selectedFile: null
-    };
+    })
+
   }
 
   handleUpload = event => {
@@ -77,7 +78,7 @@ export default class Upload extends Component {
       data.append("about",this.state.about)
       //data.append("name", this.state.name.value);
       //data.append("about", this.state.about.value);
-      api.Upload(data).then(result => { console.log(result); }).catch(err => { alert(err); })
+      api.Upload(data).then(result => { alert("Thank you!"); }).catch(err => { alert(err); })
     }
     //clear fields here
   }

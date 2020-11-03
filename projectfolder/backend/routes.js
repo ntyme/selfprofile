@@ -7,6 +7,7 @@ var upload = multer({ storage: storage });
 const config = require('../src/config');
 const DOCUMENT = require('../src/ImageModel');
 const creds = require('../src/getprofile');
+const model = require('../src/ImageModel');
 
 router.post('/upload', upload.single("file"), (req, res) => {
 
@@ -40,16 +41,5 @@ router.post('/upload', upload.single("file"), (req, res) => {
         }
     });
 });
-router.get('/display', (req, res) => {
-    var nameArg = "", link = config.AWS_LINK + 'Luna.jpg', about = "";
-    if (creds.length) { nameArg = "Nick"; } else { nameArg = creds.pop(); }
-    const profile = ImageModel.find({ name: nameArg }, function (err, profile) {
-        if (err) { console.log(err) }
-        if (profile) {
-            link = config.AWS_LINK + profile.name;
-            about = profile.about;
-        }
-    }).then({}).catch(err=>{console.log(err); return res.status(401).send("Error")})
-})
 
 module.exports = router;

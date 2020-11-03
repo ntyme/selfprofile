@@ -7,6 +7,7 @@ const config = require('../src/config');
 const PORT = 4000;
 const routing = require('./routes');
 const mongo = require('./database/mongo');
+const model = require('../src/ImageModel');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
@@ -29,9 +30,11 @@ connection.once('open', function(){
 })
 
 
-app.get('/', (req, res) =>{
-    res.send("Hello and Welcome!")
+app.post('/', (req, res) =>{
+    res.send("Welcome to the Database");
 })
+
+
 app.use('/api', routing);
 
 
