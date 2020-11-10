@@ -5,7 +5,7 @@ import { getDefaultNormalizer } from '@testing-library/react';
 import axios from 'axios';
 import config from "../src/config";
 import api from "../src/api";
-import { ReplSet } from 'mongodb';
+import { MongoClient, ReplSet } from 'mongodb';
 import('../src/styles.css')
 
 export default class Display extends Component {
@@ -19,42 +19,42 @@ export default class Display extends Component {
         };
 
     }
-    handleDisplay = () => {
-        api.Display(this.state.name)
+    componentDidMount(){
+        api.Display().then(info => {
+            this.setState({profiles: info.data.data}); 
+            for (var i = 0; i < this.state.profiles.length; i++){
+                if (this.state.profiles[i].name = localStorage.getItem('name')){
+                    this.setState({name: this.state.profiles[i].name});
+                    this.setState({about: this.state.profiles[i].about});
+                    this.setState({pic: this.state.profiles[i].fileLink});
+                }
+                else{
+                    this.setState({name: "Luna"});
+                    this.setState({about: "Rescued in 2017."});
+                    this.setState({pic: config.LUNA_LINK});
+                }
+            }
+        }).catch(err => {console.log(err); alert(err);})
     }
 
-    onChange = e => {
-        this.setState({ [e.target.name]: e.target.value });
-    };
     render() {
-        const profiles = this.state;
+
+        const {profiles, name, pic, about} = this.state;
         console.log(this.state.profiles);
         return (
             <div>
                 <div class="container">
                     <div class="picDiv">
-                        <p>Profile Pic Div</p>
+                        <img src = {this.state.pic} height = "500" width = "500"></img>
                     </div>
                     <div class="nameDiv">
-                        <input
-                            type="text"
-                            name="name"
-                            onChange={this.onChange}
-                            placeholder="Name"
-                        />
-                        <button type="submit" class="btn btn-primary" onSubmit = {this.handleDisplay()}>
-                            Display
-                        </button><br></br><br></br>
+                        <p>{this.state.name}</p>
                     </div>
                     <div class="desDiv">
-                        <p>About</p>
+                        <p>{this.state.about}</p>
                     </div>
-
                 </div>
-
             </div>
-
-
         )
     }
 }

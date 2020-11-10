@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const config = require('../src/config');
 const PORT = 4000;
 const routing = require('./routes');
-const mongo = require('./database/mongo');
+const mongo = require('../src/mongo');
 const model = require('../src/ImageModel');
 
 app.use(bodyParser.urlencoded({extended: true}));

@@ -48,23 +48,6 @@ export default class Upload extends Component {
 
   SubmitData = e => {
     e.preventDefault();
-    const data = new FormData();
-    data.append("file", this.state.selectedFile);
-    data.append("name", this.state.name);
-    data.append("about", this.state.about);
-    creds.push(this.state.name);
-    api.Upload(data).then(result => {alert("Completed!")}).catch(err => { console.log(err) })
-    this.setState({
-      description: "",
-      about: '',
-      name: '',
-      selectedFile: null
-    })
-
-  }
-
-  handleUpload = event => {
-    event.preventDefault();
     var bool = new Boolean(true);
     const { name, about, selectedFile, description } = this.state;
     if (selectedFile == null) { bool = false; alert("All fields required") }
@@ -72,19 +55,47 @@ export default class Upload extends Component {
     if (about == null) { bool = false; alert("All fields required") }
     if (description == null) { { bool = false; alert("All fields required") } }
     if (bool) {
-      const data = new FormData(event.target);
+      localStorage.setItem('name', this.state.name);
+      const data = new FormData();
+      data.append("file", this.state.selectedFile);
+      data.append("name", this.state.name);
+      data.append("about", this.state.about);
+      creds.push(this.state.name);
+      api.Upload(data).then(result => { alert("Completed!") }).catch(err => { console.log(err) })
+      this.setState({
+        description: "",
+        about: '',
+        name: '',
+        selectedFile: null
+      })
+    }
+    this.setState({
+      description: "",
+      about: '',
+      name: '',
+      selectedFile: null })
+  }
+
+  handleUpload = () => {
+    var bool = new Boolean(true);
+    const { name, about, selectedFile, description } = this.state;
+    if (selectedFile == null) { bool = false; alert("All fields required") }
+    if (name == null) { bool = false; alert("All fields required") }
+    if (about == null) { bool = false; alert("All fields required") }
+    if (description == null) { { bool = false; alert("All fields required") } }
+    if (bool) {
+      localStorage.setItem('name', this.state.name);
+      const data = new FormData();
       data.append("file", this.state.selectedFile, this.state.description);
       data.append("name", this.state.name);
-      data.append("about",this.state.about)
-      //data.append("name", this.state.name.value);
-      //data.append("about", this.state.about.value);
+      data.append("about", this.state.about)
       api.Upload(data).then(result => { alert("Thank you!"); }).catch(err => { alert(err); })
     }
     //clear fields here
   }
 
   render() {
-    const {description, selectedFile } = this.state;
+    const { description, selectedFile } = this.state;
     return (
       <form enctype="multipart/form-data" onSubmit={this.SubmitData}>
         <div className="form-group">
@@ -100,7 +111,7 @@ export default class Upload extends Component {
             onChange={this.onChange}
             placeholder="About"
           /><br></br><br></br>
-            <input
+          <input
             type="file"
             name=""
             id=""

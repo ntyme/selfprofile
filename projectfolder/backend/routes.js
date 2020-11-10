@@ -41,5 +41,14 @@ router.post('/upload', upload.single("file"), (req, res) => {
         }
     });
 });
+router.get('/', (req, res) => {
+    DOCUMENT.find({}, (err, info) => {
+        if (err){console.log(err);res.status(500).send(err)}
+        if (!info.length){return res.status(404).send("NOTHING FOUND")}
+        return res.status(200).json({data: info})
+    }).catch(err => {console.log(err)})
+})
+
+
 
 module.exports = router;

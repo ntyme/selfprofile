@@ -5,7 +5,7 @@ const api = axios.create({
 })
 
 export const Upload = payload => api.post('/api/upload', payload, {headers: {Accept: 'application/json', 'Content-Type': 'multipart/form-data'}})
-export const Display = (name) => api.post('/', name)
+export const Display = () => api.get('/api')
 
 const apis = {
     Upload,
