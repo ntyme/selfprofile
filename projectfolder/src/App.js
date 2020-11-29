@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Upload from "./upload";
 import Display from "./display";
 import Main from "./main";
+import exampleAPI from "./exampleAPI";
 
 class App extends Component {
   render() {
@@ -24,6 +25,9 @@ class App extends Component {
                 <li className="navbar-item">
                   <Link to="/upload" className="nav-link">Upload</Link>
                 </li>
+                <li className="navbar-item">
+                  <Link to="/apiCall" className="nav-link">COVID API</Link>
+                </li>
               </ul>
             </div>
           </nav>
@@ -31,6 +35,7 @@ class App extends Component {
         <Route path="/" exact component={Main} />
         <Route path="/display" component={Display} />
         <Route path="/upload" component={Upload} />
+        <Route path = "/apiCall" component = {exampleAPI}/>
         </div>
       </Router>
     );

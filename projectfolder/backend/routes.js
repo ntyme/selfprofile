@@ -8,6 +8,8 @@ const config = require('../src/config');
 const DOCUMENT = require('../src/ImageModel');
 const creds = require('../src/getprofile');
 const model = require('../src/ImageModel');
+const unirest = require('unirest');
+const axios = require('axios');
 
 router.post('/upload', upload.single("file"), (req, res) => {
 
@@ -48,7 +50,5 @@ router.get('/', (req, res) => {
         return res.status(200).json({data: info})
     }).catch(err => {console.log(err)})
 })
-
-
 
 module.exports = router;

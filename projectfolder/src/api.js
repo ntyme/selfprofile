@@ -9,7 +9,7 @@ export const Display = () => api.get('/api')
 
 const apis = {
     Upload,
-    Display
+    Display,
 }
 
 export default apis

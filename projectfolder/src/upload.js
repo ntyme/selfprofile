@@ -61,13 +61,14 @@ export default class Upload extends Component {
       data.append("name", this.state.name);
       data.append("about", this.state.about);
       creds.push(this.state.name);
-      api.Upload(data).then(result => { alert("Completed!") }).catch(err => { console.log(err) })
+      api.Upload(data).then(result => { alert("Completed!");
       this.setState({
         description: "",
         about: '',
         name: '',
         selectedFile: null
       })
+     }).catch(err => { console.log(err) })
     }
     this.setState({
       description: "",
